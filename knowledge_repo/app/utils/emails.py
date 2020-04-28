@@ -104,6 +104,7 @@ def send_subscription_email(post, tag):
 
     msg.html = post_text
 
+    email_length = current_app.config.get("MAX_STORED_EMAIL_TEXT_LENGTH")
     for user in recipient_users:
         # mark email as sent just before you send the email
         email_sent = Email(user_id=user.id,
@@ -112,7 +113,7 @@ def send_subscription_email(post, tag):
                            object_id=post.id,
                            object_type="post",
                            subject=subject,
-                           text=post_text)
+                           text=post_text[:email_length] if email_length is not None else post_text)
         db_session.add(email_sent)
         db_session.commit()
 

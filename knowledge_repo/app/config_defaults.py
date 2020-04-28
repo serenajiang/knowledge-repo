@@ -55,6 +55,9 @@ DB_AUTO_CREATE = True
 # performed using `knowledge_repo --repo <> db_upgrade ...`.
 DB_AUTO_UPGRADE = False
 
+# How much of the email text should the database store. May be useful to
+# configure if large email texts are preventing reindexing.
+MAX_STORED_EMAIL_TEXT_LENGTH = None
 
 # ---------------------------------------------------
 # Authentication configuration
