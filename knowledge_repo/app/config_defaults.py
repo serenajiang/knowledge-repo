@@ -294,6 +294,8 @@ INDEXING_ENABLED = True
 # MAIL_SUPPRESS_SEND = False  # default = app.testing
 # MAIL_ASCII_ATTACHMENTS = False  # default = False
 
+# Enable less verbose emails to use less space and improve speed.
+SHORT_SUBSCRIBER_EMAILS = False
 
 # --------------------------------------------------
 # Web Editor Configuration

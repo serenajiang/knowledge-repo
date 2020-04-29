@@ -10,7 +10,7 @@ from flask_mail import Message
 from ..proxies import db_session
 from ..proxies import current_repo
 from ..models import Email, Subscription, User, Post
-from ..utils.render import render_post
+from ..utils.render import render_post, render_post_header
 
 logger = logging.getLogger(__name__)
 
@@ -94,7 +94,11 @@ def send_subscription_email(post, tag):
                   bcc=recipients_bcc)
 
     # Iterate over fetched image files and attach them to email
-    post_text = render_post(post)
+    post_text = (
+        render_post_header(post)
+        if current_app.config.get("SHORT_SUBSCRIBER_EMAILS")
+        else render_post(post)
+    )
 
     msg.body = render_template("email_templates/subscription_email.txt",
                                full_tag=tag.name,
